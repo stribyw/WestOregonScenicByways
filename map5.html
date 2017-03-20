@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rogue-Umpqua Scenic Byway</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:title" content="Scenic Byways in Western Oregon" />
+    <meta property="og:url" content="http://cdn.rawgit.com/stribyw/WestOregonScenicByways/master/index.html" />
+    <meta property="og:description" content="Routes and Details of Western Oregon's Scenic Byways" />
+    <meta property="og:image" content="img/social.png" />
+
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
+    <!--facebook and info icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--storymap stylesheet -->
+    <link rel="stylesheet" href="css/storymap.css" />
+
+    <!--add favicon for the web page-->
+    <link rel="shortcut icon" href="img/cascadiaFavicon.ico" type="image/x-icon">
+
+    <!--add required libraries-->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--I ADDED-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--add ajax based data transmission-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--storymap javascript library -->
+    <script src="js/storymap.js"></script>
+
+    <!-- bing map -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+    <script src="http://gmaclennan.github.io/leaflet-bing-layer/leaflet-bing-layer.js"></script>
+
+    <!-- mini globle map -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <script src="js/globeminimap.js"></script>
+</head>
+<body scroll="no" style="overflow: hidden;">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 main">
+            <section data-scene="RogueUmpqua">
+                <h2>Rogue-Umpqua Scenic Byway</h2>
+                <h4>Distance: 172 miles, Allow: 5 to 7 hours</h4>
+                <p>The Rogue and Umpqua Rivers are two of Oregon's most storied, both for their world famous fishing and rafting and for their primal beauty. Traditionally a timber town, Roseburg today is known for recreational fishing, and a growing number of wineries and microbreweries. From Roseburg, the byway leads east through scenic oak-dotted hills and meets up with the North Umpqua near Glide. Traveling upstream, the byway follows the North Umpqua where you're likely to spot anglers casting for trout, salmon, and summer steelhead, native oceangoing rainbow trout that can reach 20 pounds. Hikers and mountain bikers are captivated by the North Umpqua Trail that winds for 79 miles along the river's banks. With more than 15 cascades along its route, the byway has earned the nickname "Highway of Waterfalls." Well-marked trails provide several overlooking views of the river's canyons.</p>
+                <p>Past Toketee Lake, OR-138 bits farwell to the North Umpqua and turns south to skirt the shores of Diamond Lake. Framed by 9,200-foot Mt. Thielsen and 8,363-foot Mt. Bailey, Diamond Lake is a jewel of the Cascade Mountains. At the end of Diamond Lake OR-138 continues south toward Crater Lake National Park. The Rogue-Umpqua Scenic Byway joins OR-230 and swings southwest into the Rogue River-Siskiyou National Forest, where the Rogue emerges from underground lava tubes. The byway joins OR-62 just north of Union Creek, the western terminus of a wagon road for settlers crossing the Cascades. The byway passes several campground and fishing spots as it follows the Rogue downstream. At Joseph H. Stewart State Recreation Area, the river widens into Lost Creek Lake. Eventually the byway joins OR-234 and ends at Gold Hill, which is less than an hour from Medford, Ashland, and Grants Pass.</p>
+                <div class="button">
+                  <button onclick="goBack()">Go Back</button>
+                </div>
+            </section>
+        </div>
+
+        <div id="map" class="col-sm-0 col-md-0 sidebar"></div>
+
+    </div>
+    <!--facebook icon-->
+    <!--UPDATE href link below!-->
+    <a class="fa fa-facebook-square btn" href="https://facebook.com/sharer.php?u=http://cdn.rawgit.com/stribyw/WestOregonScenicByways/master/index.html" target="_blank"></a>
+    <!--info icon-->
+    <i class="fa fa-info-circle btn" style="top:50px" data-toggle="modal" data-target="#info-modal"></i>
+
+    <!--the info page-->
+    <div class="modal fade" id="info-modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">About</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Scenic Byways of Western Oregon, GEOG371, Winter 2017, Final Project</p>
+                    <p>Released Date: 03/19/2017 | Version: 1.0 | MIT License </p>
+                    <p><b>Authors: Keith Striby, Bo Zhao</b> | College of Earth, Ocean, Atmospheric Science | Oregon State University </p>
+                    <p>Page JavaScript, CSS, and HTML templates, and mini globe was provided by Bo Zhao.</p>
+                    <p>Route and point data collection and customization, multiple baselayer control, zoom control positioning, route details, and other template modifications was by Keith Striby.</p>
+                    <p>Context about Oregon Scenic Byways was summarized by Keith Striby and collected in March 2017 from the <a href="https://www.oregon.gov/ODOT/HWY/SCENICBYWAYS/pages/driving_guide.aspx" target="_blank">Oregon Scenic Byways Driving Guide</a>.</p>
+                    <p>Flag icons were acquired from <a href="http://findicons.com/icon/28524/layers" target="_blank">findicons</a>.</p>
+                    <p>The favicon image was acquired from <a href="http://www.crwflags.com/fotw/flags/us%7Dcasc.html" target="_blank">crwflags</a>.</p>
+                    <p>This story map uses geospatial data from mapbox, Microsoft Bing map, Open Street Maps, and USGS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function goBack() {
+      window.history.back();
+    }
+
+    var RogueUmpqua_legend ='<i style="background: blue; opacity: 0.5"></i><p><b>Rogue-Umpqua Scenic Byway</b></p>';
+
+    var layers = {
+      'layer 1': [L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+          id: 'mapbox.satellite'}),],
+      'rogueUmpqua': [L.geoJson.ajax('assets/RogueUmpqua.geojson', {
+          color: 'blue',
+          weight: 5,
+          opacity: 0.4}), RogueUmpqua_legend]};
+
+    var scenes = {
+        RogueUmpqua: {lat: 42.9, lng: -123.6, zoom: 9, layers: ['layer 1', 'rogueUmpqua']}
+    };
+
+    $('.main').storymap({
+        scenes: scenes,
+        layers: layers,
+        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            var map = L.map('map', {zoomControl: true, scrollWheelZoom: false});
+
+            var grayscale = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+                  maxZoom: 18,
+                  minZoom: 6,
+                  attribution: '<a href="http://ceoas.oregonstate.edu/" target="_blank">Keith Striby</a>',
+                  id: 'mapbox.light'}),
+                streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                  maxZoom: 18,
+                  minZoom: 6,
+                  id: 'mapbox.streets',
+                  attribution: '<a href="http://ceoas.oregonstate.edu/" target="_blank">Keith Striby</a>'}),
+                satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+                  maxZoom: 18,
+                  minZoom: 6,
+                  id: 'mapbox.satellite',
+                  attribution: '<a href="http://ceoas.oregonstate.edu/" target="_blank">Keith Striby</a>'});
+
+             var baseLayers = {
+           		"Grayscale": grayscale,
+              "Streets": streets,
+              "Satellite": satellite
+           	};
+
+            L.control.layers(baseLayers).addTo(map);
+            L.control.scale({position: 'bottomright', metric: false}).addTo(map);
+
+            //create a mini globe as the overview map control.
+            var miniMap = new L.Control.GlobeMiniMap({
+                marker:'red',
+                position: 'bottomright'
+            }).addTo(map);
+
+            // Create additional Control placeholders to reposition zoom control
+            function addControlPlaceholders(map) {
+              var corners = map._controlCorners,
+                l = 'leaflet-',
+                container = map._controlContainer;
+
+                function createCorner(vSide, hSide) {
+                  var className = l + vSide + ' ' + l + hSide;
+
+                  corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+                }
+
+                createCorner('verticalcenter', 'left');
+                createCorner('verticalcenter', 'right');
+            }
+            addControlPlaceholders(map);
+
+            // Change the position of the Zoom Control to a newly created placeholder.
+            map.zoomControl.setPosition('verticalcenterright');
+
+            var flagicon = L.Icon.extend({
+                options:{
+                    iconSize: [70,70],
+                    iconAnchor: [30, 60],
+                    popupAnchor: [2, -30]
+                }
+            });
+
+            var start = new flagicon ({iconUrl: 'img/flag1rightgreen.png'});
+            var finish = new flagicon ({iconUrl: 'img/flag2leftred.png'});
+            var points = null;
+
+            $.getJSON("assets/RogueUmpquaPoints.geojson", function(data){
+              points = L.geoJson(data,{
+                onEachFeature: function (feature, layer){
+                  layer.bindPopup(feature.properties.F1);
+                }, pointToLayer: function (feature, latlng){
+                  var marker = null;
+                  if (feature.properties.F1 == "Start"){
+                    marker = L.marker(latlng,{icon: start});
+                  }else{
+                    marker = L.marker(latlng,{icon: finish});
+                  }
+                  return marker;
+                }
+              }).addTo(map);
+            });
+            return map;
+        }
+    });
+</script>
+</body>
+</html>

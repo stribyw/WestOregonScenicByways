@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cascade Lakes Scenic Byway</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:title" content="Scenic Byways in Western Oregon" />
+    <meta property="og:url" content="http://cdn.rawgit.com/stribyw/WestOregonScenicByways/master/index.html" />
+    <meta property="og:description" content="Routes and Details of Western Oregon's Scenic Byways" />
+    <meta property="og:image" content="img/social.png" />
+
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
+    <!--facebook and info icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--storymap stylesheet -->
+    <link rel="stylesheet" href="css/storymap.css" />
+
+    <!--add favicon for the web page-->
+    <link rel="shortcut icon" href="img/cascadiaFavicon.ico" type="image/x-icon">
+
+    <!--add required libraries-->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--I ADDED-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--add ajax based data transmission-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--storymap javascript library -->
+    <script src="js/storymap.js"></script>
+
+    <!-- bing map -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+    <script src="http://gmaclennan.github.io/leaflet-bing-layer/leaflet-bing-layer.js"></script>
+
+    <!-- mini globle map -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <script src="js/globeminimap.js"></script>
+</head>
+<body scroll="no" style="overflow: hidden;">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 main">
+            <section data-scene="CascadeLakes">
+                <h2>Cascade Lakes Scenic Byway</h2>
+                <h4>Distance: 66 miles, Allow: 3 to 5 hours</h4>
+                <p>After enjoying everything that Bend has to offer, the byway begins on its west side where OR-372 quickly begins its climb toward Mt. Bachelor. Just within the Deschutes National Forest boundary, FR-41 leads to the Deschutes River, with access to fishing, canoeing, and two notable water falls, Benham and Dillon. As you continue climbing westward, the forest transitions into a mix of pine, fir and hemlock. The enormous cone of Mt. Bachelor suddenly dominates the horizon, and houses the largest ski area in Oregon. As the byway continues you’ll get a look at Broken Top Mountain, a stratovolcano – a tall, canonical volcano. Volcanoes and glaciers together formed the dozens of lakes in this area, many created in basins scoured by ice and blocked by lava dams. </p>
+                <p>The Route skirts an expansive wet meadow at the north end of Sparks Lake, and then near emerald-green Devils Lake which has a jumble of lava boulders that tumble down from Devils Hill. This was where NASA astronauts trained for its moon-landing missions in the 1960s. Continuing south dozens of lakes beckon around the byway with numerous side roads and trails to them in the Three Sisters Wilderness. Elk Lake and the nearby Hosmer Lake provide a superb view of Mt. Bachelor while fishing it. The lifeblood of Central Oregon, the Deschutes River begins 5 miles south as a small creek flowing from Little Lava Lake. A few miles further the meadow flows through a meadow and Crane Prairie Reservoir, famous for its 5- to 10-pound lunker rainbow trout, known as “Cranebows.” You’ll pass several more lakes with good fishing and boat access as you meet OR-58, where Crescent Lake and Odell Lake offer two more spots to cast a line or paddle a canoe. </p>
+                <div class="button">
+                  <button onclick="goBack()">Go Back</button>
+                </div>
+            </section>
+        </div>
+
+        <div id="map" class="col-sm-0 col-md-0 sidebar"></div>
+
+    </div>
+    <!--facebook icon-->
+    <!--UPDATE href link below!-->
+    <a class="fa fa-facebook-square btn" href="https://facebook.com/sharer.php?u=http://cdn.rawgit.com/stribyw/WestOregonScenicByways/master/index.html" target="_blank"></a>
+    <!--info icon-->
+    <i class="fa fa-info-circle btn" style="top:50px" data-toggle="modal" data-target="#info-modal"></i>
+
+    <!--the info page-->
+    <div class="modal fade" id="info-modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">About</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Scenic Byways of Western Oregon, GEOG371, Winter 2017, Final Project</p>
+                    <p>Released Date: 03/19/2017 | Version: 1.0 | MIT License </p>
+                    <p><b>Authors: Keith Striby, Bo Zhao</b> | College of Earth, Ocean, Atmospheric Science | Oregon State University </p>
+                    <p>Page JavaScript, CSS, and HTML templates, and mini globe was provided by Bo Zhao.</p>
+                    <p>Route and point data collection and customization, multiple baselayer control, zoom control positioning, route details, and other template modifications was by Keith Striby.</p>
+                    <p>Context about Oregon Scenic Byways was summarized by Keith Striby and collected in March 2017 from the <a href="https://www.oregon.gov/ODOT/HWY/SCENICBYWAYS/pages/driving_guide.aspx" target="_blank">Oregon Scenic Byways Driving Guide</a>.</p>
+                    <p>Flag icons were acquired from <a href="http://findicons.com/icon/28524/layers" target="_blank">findicons</a>.</p>
+                    <p>The favicon image was acquired from <a href="http://www.crwflags.com/fotw/flags/us%7Dcasc.html" target="_blank">crwflags</a>.</p>
+                    <p>This story map uses geospatial data from mapbox, Microsoft Bing map, Open Street Maps, and USGS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function goBack() {
+      window.history.back();
+    }
+
+    var CascadeLakes_Legend ='<i style="background: blue; opacity: 0.5"></i><p><b>Cascade Lakes Scenic Byway</b></p>';
+
+    var layers = {
+      'layer 1': [L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+          id: 'mapbox.satellite'}),],
+      'craterKlamath': [L.geoJson.ajax('assets/CascadeLakes.geojson', {
+          color: 'blue',
+          weight: 5,
+          opacity: 0.4}), CascadeLakes_Legend]};
+
+    var scenes = {
+        CascadeLakes: {lat: 43.78, lng:  -122, zoom: 10, layers: ['layer 1', 'craterKlamath']}
+    };
+
+    $('.main').storymap({
+        scenes: scenes,
+        layers: layers,
+        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            var map = L.map('map', {zoomControl: true, scrollWheelZoom: false});
+
+            var grayscale = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+                  maxZoom: 18,
+                  minZoom: 6,
+                  attribution: '<a href="http://ceoas.oregonstate.edu/" target="_blank">Keith Striby</a>',
+                  id: 'mapbox.light'}),
+                streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                  maxZoom: 18,
+                  minZoom: 6,
+                  id: 'mapbox.streets',
+                  attribution: '<a href="http://ceoas.oregonstate.edu/" target="_blank">Keith Striby</a>'}),
+                satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+                  maxZoom: 18,
+                  minZoom: 6,
+                  id: 'mapbox.satellite',
+                  attribution: '<a href="http://ceoas.oregonstate.edu/" target="_blank">Keith Striby</a>'});
+
+             var baseLayers = {
+           		"Grayscale": grayscale,
+              "Streets": streets,
+              "Satellite": satellite
+           	};
+
+            L.control.layers(baseLayers).addTo(map);
+            L.control.scale({position: 'bottomright', metric: false}).addTo(map);
+
+            //create a mini globe as the overview map control.
+            var miniMap = new L.Control.GlobeMiniMap({
+                marker:'red',
+                position: 'bottomright'
+            }).addTo(map);
+
+            // Create additional Control placeholders to reposition zoom control
+            function addControlPlaceholders(map) {
+              var corners = map._controlCorners,
+                l = 'leaflet-',
+                container = map._controlContainer;
+
+                function createCorner(vSide, hSide) {
+                  var className = l + vSide + ' ' + l + hSide;
+
+                  corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+                }
+
+                createCorner('verticalcenter', 'left');
+                createCorner('verticalcenter', 'right');
+            }
+            addControlPlaceholders(map);
+
+            // Change the position of the Zoom Control to a newly created placeholder.
+            map.zoomControl.setPosition('verticalcenterright');
+
+            var flagicon = L.Icon.extend({
+                options:{
+                    iconSize: [70,70],
+                    iconAnchor: [30, 60],
+                    popupAnchor: [2, -30]
+                }
+            });
+
+            var start = new flagicon ({iconUrl: 'img/flag1rightgreen.png'});
+            var finish = new flagicon ({iconUrl: 'img/flag2leftred.png'});
+            var points = null;
+
+            $.getJSON("assets/CascadeLakesPoints.geojson", function(data){
+              points = L.geoJson(data,{
+                onEachFeature: function (feature, layer){
+                  layer.bindPopup(feature.properties.F1);
+                }, pointToLayer: function (feature, latlng){
+                  var marker = null;
+                  if (feature.properties.F1 == "Start"){
+                    marker = L.marker(latlng,{icon: start});
+                  }else{
+                    marker = L.marker(latlng,{icon: finish});
+                  }
+                  return marker;
+                }
+              }).addTo(map);
+            });
+            return map;
+        }
+    });
+</script>
+</body>
+</html>

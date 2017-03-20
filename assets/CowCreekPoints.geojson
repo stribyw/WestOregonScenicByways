@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "F1": "Start", "latitude": 42.973368, "longidute": -123.336303 }, "geometry": { "type": "Point", "coordinates": [ -123.336321000247395, 42.973335999963474 ] } },
+{ "type": "Feature", "properties": { "F1": "Finish", "latitude": 42.746165, "longidute": -123.372423 }, "geometry": { "type": "Point", "coordinates": [ -123.372433000191336, 42.746220000316043 ] } }
+]
+}
