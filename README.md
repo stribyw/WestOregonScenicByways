@@ -67,7 +67,7 @@ the user to upload and view the map.
 The first function utilized is for returning to the previous part of the page the user was once on. First the
 function in JavaScript is: 
 
-	![](readme-img/1one.png)
+	![alt tag](readme-img/1one.png)
 
 This code is then connected to the functionality of the button with the following in HTML: 
 
