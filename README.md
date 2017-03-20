@@ -67,51 +67,51 @@ the user to upload and view the map.
 The first function utilized is for returning to the previous part of the page the user was once on. First the
 function in JavaScript is: 
 
-	![alt tag](/readme-img/1one.png)
+	![](readmeimg/one.png)
 
 This code is then connected to the functionality of the button with the following in HTML: 
 
-	![alt tag](readme-img/2two.png)
+	![](readmeimg/two.png)
 
 With this following code in HTML:
 
-	![](readme-img/3three.png)
+	![](readmeimg/three.png)
 
 The following JavaScript code is connected to the HTML page for displaying the map. The CharlestonBandon scene
 variable is tied to the HTML code, therefore tying its layer and legend variables to it as well.
 
-	![](readme-img/4four.png)
+	![](readmeimg/four.png)
 
 The following function contains the remainder of the story map functionality, and houses the remaining
 functions. The dollar function refers to an element in the Document Object Model, and in this case, “.main.”
 
-	![](readme-img/5five.png)
+	![](readmeimg/five.png)
 
 Here the details of the story map are set, enabling scenes, layers, and legend. Then a function createMap
 houses the following code. A map variable is then placed in it, and tied to the map div. Zoom control is
 enabled, and scroll wheel zoom is disabled. 
 
-	![](readme-img/6six.png)
+	![](readmeimg/six.png)
 
 Here the three baselayers are declared with the L.titleLayer function. Then the variable baselayers houses
 each variable for control, and then functionality for baselayer control is enabled with the L.control.layers
 function. Finally, the map scale function places it in the bottom right, and sets units to SAE. 
 
-	![](readme-img/7seven.png)
+	![](readmeimg/seven.png)
 
 Here the mini globe variable is set, and the details of its marker and position is customized. 
 
-	![](readme-img/8eight.png)
+	![](readmeimg/eight.png)
 
 Here the location of zoom control on the map display is controlled. The control final position was then
 adjusted using CSS. 
 	
-	![](readme-img/9nine.png)
+	![](readmeimg/nine.png)
 
 Then the flag icons used are extended so that two different ones may be used and customized using GeoJSON
 data. 
 
-	![](readme-img/10ten.png)
+	![](readmeimg/ten.png)
 
 ## 6. Conclusion
 
